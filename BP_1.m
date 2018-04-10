@@ -9,14 +9,14 @@ amp=1;                          %设置BPSK  amplitude(振幅)为1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %LDPC构造
 t = 0.5;                          %自相关系数
-iteration=5;
+iteration=1;
 load H.mat;
 [rows,cols]=size(H);
 rate=(cols-rows)/cols;          %码率
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-someSNR=2.5;               %仿真信噪比
+someSNR=0;               %仿真信噪比
 BER=zeros(1,length(someSNR));
-frame = 5000;                  %仿真帧数
+frame = 1000;                  %仿真帧数
 % count=1;
 for S_num=1:length(someSNR) 
     total_num=0;
@@ -57,7 +57,7 @@ for S_num=1:length(someSNR)
   BER(S_num)=total_num/(frame*cols);
 end
 toc
-save noise_hat_t0.5_s2.5.txt -ascii noise_hat_matrix;
-save y_t0.5_s2.5.txt -ascii y_matrix;
-save u_t0.5_s2.5.txt -ascii u_matrix;
+save noise_hat_t0.5_s0.txt -ascii noise_hat_matrix;
+save y_t0.5_s0.txt -ascii y_matrix;
+save u_t0.5_s0.txt -ascii u_matrix;
 BER
