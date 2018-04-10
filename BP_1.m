@@ -14,9 +14,10 @@ load H.mat;
 [rows,cols]=size(H);
 rate=(cols-rows)/cols;          %码率
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-someSNR=2.5;               %仿真信噪比
+someSNR=0;               %仿真信噪比
 BER=zeros(1,length(someSNR));
-frame = 5000;                  %仿真帧数
+frame = 1000; %仿真帧数
+s_hat1b = zeros(1,cols);
 % count=1;
 for S_num=1:length(someSNR) 
     total_num=0;
@@ -44,7 +45,14 @@ for S_num=1:length(someSNR)
         related_noise = noise*related_n; 
         y = s + related_noise;   % AWGN transmission
         scale(1:length(u))=1;
-        [s_hat1b,s_hat1s] = decodeLogDomain(y,H,sigma,iteration);
+        for j = 1:cols
+            if y(j)<0
+                s_hat1b(j) = 0;
+            else
+                s_hat1b(j) = 1;
+            end
+        end
+        %[s_hat1b,s_hat1s] = decodeLogDomain(y,H,sigma,iteration);
         noise_hat = y - s_hat1b;
         noise_hat_matrix(i,:) = noise_hat;
         y_matrix(i,:) = y;
@@ -57,7 +65,7 @@ for S_num=1:length(someSNR)
   BER(S_num)=total_num/(frame*cols);
 end
 toc
-save noise_hat_t0.5_s2.5.txt -ascii noise_hat_matrix;
-save y_t0.5_s2.5.txt -ascii y_matrix;
-save u_t0.5_s2.5.txt -ascii u_matrix;
+save noise_hat_t0.5_s0.txt -ascii noise_hat_matrix;
+save y_t0.5_s0.txt -ascii y_matrix;
+save u_t0.5_s0.txt -ascii u_matrix;
 BER
