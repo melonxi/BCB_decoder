@@ -3,7 +3,7 @@ from keras.models import load_model
 
 noise_hat_matrix = []
 noise_wave_matrix = np.zeros((1000, 576))
-noise_hat_matrix = np.loadtxt('noise_hat_0.5_1.txt')
+noise_hat_matrix = np.loadtxt('noise_hat_t0.5_s0.txt')
 model = load_model('model_0.5.h5')
 for i in range(1000):
     print(i)
@@ -14,4 +14,4 @@ for i in range(1000):
     noise_wave_reshape = noise_wave.reshape((1,576))
     noise_wave_matrix[i,:] = noise_wave_reshape 
 
-np.savetxt("noise_wave_0.5_1.txt",noise_wave_matrix)
+np.savetxt("noise_wave_t0.5_s0.txt",noise_wave_matrix)
