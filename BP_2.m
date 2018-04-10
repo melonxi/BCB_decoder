@@ -3,9 +3,9 @@
 clear all;
 close all;
 clc;
-y_matrix= textread('y_t0.5_s1.5.txt');
-u_matrix = textread('u_t0.5_s1.5.txt');
-noise_wave_matrix= textread('noise_wave_t0.5_s1.5.txt');
+y_matrix= textread('y_t0.5_s2.txt');
+u_matrix = textread('u_t0.5_s2.txt');
+noise_wave_matrix= textread('noise_wave_t0.5_s2.txt');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic                     
 amp=1;                          %设置BPSK  amplitude(振幅)为1
@@ -17,7 +17,7 @@ load H.mat;
 [rows,cols]=size(H);
 rate=(cols-rows)/cols;          %码率
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-someSNR=1.5;               %仿真信噪比
+someSNR=2;               %仿真信噪比
 BER=zeros(1,length(someSNR));
 frame = 1000;
 total_num=0;
